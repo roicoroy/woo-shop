@@ -1,0 +1,76 @@
+<div *ngIf="viewState$ | async as vs">
+  Shipping Zones | shipping_zones
+  <ion-list>
+    <ion-item>
+      <ion-select (ionChange)="shippingZones($event)" label="Shipping Zones">
+        <div *ngFor="let zone of vs.shipping_zones">
+          <ion-select-option [value]="zone">
+            {{ zone.name }}
+          </ion-select-option>
+        </div>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</div>
+
+<div *ngIf="viewState$ | async as vs">
+  <ion-list *ngIf="vs.selected_shipping_zone != null">
+    NEW Shipping Methods | shipping_lines
+    <ion-item>
+      <ion-select (ionChange)="shippingLinesChange($event)" label="Shipping Methods">
+        <div *ngFor="let method of vs.shipping_methods">
+          <ion-select-option [value]="method">
+            {{ method.title }}
+          </ion-select-option>
+        </div>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</div>
+
+<ion-row *ngIf="viewState$ | async as vs">
+  <ion-col *ngIf="vs.selected_shipping_line?.settings">
+    <ion-text color="primary">
+      <h3>
+        {{ vs.selected_shipping_line?.title }}
+      </h3>
+    </ion-text>
+    <span [innerHtml]="vs.selected_shipping_line?.method_description"></span>
+
+    <ion-accordion-group *ngIf="vs.selected_shipping_line?.settings">
+      Settings Group
+      <ion-accordion value="class_cost_54" *ngIf="vs.selected_shipping_line?.settings?.class_cost_54">
+        <ion-item slot="header" color="light"
+          (click)="selectShippingSetting(vs.selected_shipping_line?.settings?.class_cost_54)">
+          <ion-label>
+            {{ vs.selected_shipping_line?.settings.class_cost_54?.label }}
+          </ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          price: {{ vs.selected_shipping_line?.settings.class_cost_54?.value }}
+        </div>
+      </ion-accordion>
+      <ion-accordion value="class_cost_62" *ngIf="vs.selected_shipping_line?.settings?.class_cost_62">
+        <ion-item slot="header" color="light"
+          (click)="selectShippingSetting(vs.selected_shipping_line?.settings?.class_cost_62)">
+          <ion-label>
+            {{ vs.selected_shipping_line?.settings.class_cost_62?.label }}
+          </ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          price: {{ vs.selected_shipping_line?.settings.class_cost_62?.value }}
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </ion-col>
+</ion-row>
+
+<ion-list *ngIf="viewState$ | async as vs">
+  <ion-item>
+    <ion-select (ionChange)="paymentGatewaysChange($event)" label="Payment Gateways">
+      <ion-select-option [value]="payment" *ngFor="let payment of vs.payment_gateways">
+        {{ payment.id }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>

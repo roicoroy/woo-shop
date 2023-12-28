@@ -1,0 +1,42 @@
+<ion-grid>
+  <ion-row *ngIf="viewState$ | async as vs" class="ion-text-center">
+    <ion-col>
+      
+      <ion-text color="primary">
+        {{ 'Billing Address' }}
+      </ion-text>
+
+      <address-view [address]="vs.customer?.billing"></address-view>
+
+      <ion-button (click)="openModalAddressPage('billing_address', vs.customer?.billing)" expand="block" fill="clear"
+        shape="round">
+        Edit Billing Address
+      </ion-button>
+
+      <!-- <ion-button (click)="clear('billing_address')" expand="block" fill="clear" shape="round">
+        Clear
+      </ion-button> -->
+
+    </ion-col>
+
+    <ion-col>
+      
+      <ion-text color="primary">
+        Shipping Address
+      </ion-text>
+
+      <address-view [address]="vs.customer?.shipping"></address-view>
+
+      <ion-button (click)="openModalAddressPage('shipping_address', vs.customer?.shipping)" expand="block" fill="clear"
+        shape="round">
+        Edit Shipping Address
+      </ion-button>
+
+      <!-- <ion-button (click)="clear('shipping_address')" expand="block" fill="clear" shape="round">
+        Clear
+      </ion-button> -->
+    </ion-col>
+
+  </ion-row>
+
+</ion-grid>

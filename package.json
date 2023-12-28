@@ -1,0 +1,10 @@
+{
+  "name": "woo-shop",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "deploy-frontend": "cd frontend && npm run build-prod && cp -R www ../server/public_html/www"
+  },
+  "author": "",
+  "license": "ISC"
+}

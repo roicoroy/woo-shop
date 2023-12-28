@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-menu-button menu='startmenu'></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        Home
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-button (click)="shopPage()" expand="block" fill="clear" shape="round">
+      Shop
+    </ion-button>
+    <ion-button (click)="postsPage()" expand="block" fill="clear" shape="round">
+      Posts
+    </ion-button>
+  </div>
+
+</ion-content>

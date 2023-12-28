@@ -1,0 +1,5 @@
+<div *ngIf="viewState$ | async as vs">
+  <ion-badge color="success" *ngIf="vs.lineItems?.length > 0">
+    {{ vs.lineItems?.length }}
+  </ion-badge>
+</div>

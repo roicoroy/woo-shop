@@ -1,0 +1,46 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Posts List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false" class="page-content ion-padding" [fullscreen]="true" no-bounce has-bouncing="false" forceOverscroll="false" class="ion-padding">
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        Posts List
+      </ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <ion-grid>
+    <ion-row *ngIf="viewState$ | async as vs">
+      <ion-col>
+        <ion-card *ngFor="let post of vs.posts" [routerLink]="['/post', post.id]" class="post-card">
+
+          <ion-card-header>
+            <ion-card-title [innerHTML]="post.title.rendered"></ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p [innerHTML]="post.excerpt.rendered"></p>
+          </ion-card-content>
+
+          <ion-item class="ion-activated" detail lines="none" color="secondary">
+            <ion-label *ngIf="!post.modified">
+              {{post.date | date}}
+            </ion-label><ion-label *ngIf="post.modified">
+              {{post.modified | date}}</ion-label>
+            <ion-label class="read-more-label">Read More</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

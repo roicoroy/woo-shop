@@ -1,0 +1,73 @@
+<ion-header [translucent]="false">
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="product-list" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ pageTitle }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+
+  <div *ngIf="(viewState$ | async) as vs">
+    <div *ngIf="vs.product; else Loading">
+      <ion-card class="card product">
+        <ion-card-header>
+          <ion-card-title>
+            {{ vs.product?.name }}
+          </ion-card-title>
+        </ion-card-header>
+
+        <add-to-cart [product]="vs.product"></add-to-cart>
+
+        <ion-card-content>
+          <!-- <ion-text color="primary" [innerHTML]="sanitise(vs?.product?.price_html)"></ion-text> -->
+          <ion-list>
+            <ion-item>
+              <ion-label>
+                {{ vs.product?.average_rating }}
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label *ngFor="let tag of vs.product?.tags">
+                {{ tag.name }} || {{ tag.slug }}
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label *ngFor="let category of vs.product?.categories">
+                {{ category.name }} || {{ category.slug }}
+              </ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>
+                {{ vs.product?.price | currency}}
+              </ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>
+                {{ vs.product?.regular_price | currency}}
+              </ion-label>
+            </ion-item>
+
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ng-template #Loading>
+      <ion-card>
+        <ion-card-content class="ion-text-center">
+          <ion-spinner name="bubbles"></ion-spinner>
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
+  </div>
+
+
+
+
+</ion-content>

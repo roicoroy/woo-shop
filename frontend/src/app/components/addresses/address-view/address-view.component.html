@@ -1,0 +1,90 @@
+<ion-list *ngIf="address">
+    <ion-item *ngIf="address?.email">
+        <ion-label>
+            Email:
+        </ion-label>
+        <ion-text color="primary">
+            {{ address?.email }}
+        </ion-text>
+    </ion-item>
+</ion-list>
+<ion-list>
+    <ion-item>
+        <ion-label>
+            First name:
+        </ion-label>
+        <ion-text color="primary">
+            {{ address?.first_name }}
+        </ion-text>
+    </ion-item>
+</ion-list>
+<ion-list>
+    <ion-item>
+        <ion-label>
+            Last name:
+        </ion-label>
+        <ion-text color="primary">
+            {{ address?.last_name }}
+        </ion-text>
+    </ion-item>
+</ion-list>
+<ion-list>
+    <ion-item>
+        <ion-label>
+            Address 1:
+        </ion-label>
+        <ion-text color="primary">
+            {{ address?.address_1 }}
+        </ion-text>
+    </ion-item>
+</ion-list>
+<ion-list>
+    <ion-item>
+        <ion-label>
+            Address 2:
+        </ion-label>
+        <ion-text color="primary">
+            {{ address?.address_2 }}
+        </ion-text>
+    </ion-item>
+</ion-list>
+<ion-list>
+    <ion-item>
+        <ion-label>
+            Postcode:
+        </ion-label>
+        <ion-text color="primary">
+            {{ address?.postcode }}
+        </ion-text>
+    </ion-item>
+</ion-list>
+<ion-list>
+    <ion-item>
+        <ion-label>
+            City:
+        </ion-label>
+        <ion-text color="primary">
+            {{ address?.city }}
+        </ion-text>
+    </ion-item>
+</ion-list>
+<ion-list>
+    <ion-item>
+        <ion-label>
+            Country:
+        </ion-label>
+        <ion-text color="primary">
+            {{ address?.country }}
+        </ion-text>
+    </ion-item>
+</ion-list>
+<ion-list>
+    <ion-item>
+        <ion-label>
+            Phone:
+        </ion-label>
+        <ion-text color="primary">
+            {{ address?.phone }}
+        </ion-text>
+    </ion-item>
+</ion-list>

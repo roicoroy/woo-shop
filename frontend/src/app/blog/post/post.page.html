@@ -1,0 +1,92 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="posts"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Post
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false" no-bounce has-bouncing="false" forceOverscroll="false" class="ion-padding">
+
+  <div *ngIf="viewState$ | async as vs">
+    <ng-container *ngIf="vs.post; else LoadingEl">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            {{ vs.post?.post?.title?.rendered }}
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="vs.post?.post?.content?.rendered">
+          <ion-col size="12">
+            <div [innerHTML]="vs.post?.post?.content?.rendered"></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-list>
+              <ion-item lines="none">
+                <ion-label>
+                  By <b> {{ vs.post?.post?.author }} </b> on
+                  <span *ngIf="!vs.post?.post.modified">
+                    {{ vs.post?.post?.date | date }}
+                  </span>
+                  <span *ngIf="vs.post?.post?.modified">
+                    {{ vs.post?.post?.modified | date }}
+                  </span>
+                </ion-label>
+              </ion-item>
+              <ion-item *ngFor="let category of vs?.post?.categories" lines="none">
+                <ion-badge class="post-category" color="secondary" [routerLink]="['/posts']"
+                  [queryParams]="{ categoryId: category.id,  title: category.name}">
+                  {{ category?.name }}
+                </ion-badge>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="vs.post?.comments">
+          <ion-col size="12">
+            <ion-list class="post-comments">
+              <ion-item *ngFor="let comment of vs.post?.comments">
+                <ion-avatar slot="start">
+                  <img src="{{ comment?.author_avatar_urls[24]}} ">
+                </ion-avatar>
+                <ion-label>
+                  <h2>
+                    {{ comment.author_name }}
+                  </h2>
+                  <p [innerHTML]="comment.content?.rendered"></p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-container>
+
+    <ng-template #LoadingEl>
+      <ion-grid>
+        <ion-row class="ion-text-center">
+          <ion-col size="12">
+            <ion-spinner name="bubbles"></ion-spinner>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+  </div>
+
+  <!-- <ion-infinite-scroll (ionInfinite)="loadMoreComments($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more comments...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="createComment()">Add a Comment</ion-button>
+  </ion-toolbar>
+</ion-footer>
