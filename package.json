@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "deploy-frontend": "cd frontend && npm run build-prod && cp -R www ../server/public_html/www"
+    "deploy-frontend": "cd frontend && npm run build-prod && cp -R www ../bedrock/web/www"
   },
   "author": "",
   "license": "ISC"
